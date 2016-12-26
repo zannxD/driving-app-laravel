@@ -1,0 +1,18 @@
+customer list -> search -> status
+customer -insert - > name,joinDate,nic,phone1,phone2,address,remarks,totalfees
+customer - update ->   id ->to identify the customer , status ======= name,joinDate,nic,phone1,phone2,address,remarks,totalfees
+customer view -> id-> all of customer columns, exams related to that customer, payments related to that customer
+
+// in customer table migration , status-column -> default('active');
+
+exams -> insert ->cid, examDate, type, time, code
+exams ->update ->id-> status, aplyingDate ====== cid, examDate, type, time, code
+exams-> delete->id
+
+// in exam  table migration , status-column ->default('pending');
+
+
+payments -> list -> search-> fromDate,toDate
+payments -> add -> paymentDate,type,cid,remarks
+payment -> update -> id -> paymentDate,type,cid,remarks
+payment->delete->id
