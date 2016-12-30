@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnToExams extends Migration
+class AddColumnToCustomers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnToExams extends Migration
      */
     public function up()
     {
-        Schema::table('exams', function (Blueprint $table) {
-            $table->string('applying_date');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('remarks')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddColumnToExams extends Migration
      */
     public function down()
     {
-        Schema::table('exams', function (Blueprint $table) {
+        Schema::table('customers', function (Blueprint $table) {
             //
         });
     }

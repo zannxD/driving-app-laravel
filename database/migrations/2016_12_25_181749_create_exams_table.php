@@ -6,33 +6,33 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateExamsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('exams', function (Blueprint $table) {
-            $table->increments('id');
-            //customer id foreign key ->nullable()
-            $table->date('date');
-          //  $table->string('exam_no');
-            $table->string('code');
-            $table->string('type');
-            $table->time('time');
-            $table->string('status');
-            $table->timestamps();
-        });
-    }
+  /**
+  * Run the migrations.
+  *
+  * @return void
+  */
+  public function up()
+  {
+    Schema::create('exams', function (Blueprint $table) {
+      $table->increments('id');
+      $table->integer('customer_id')->nullable();
+      $table->date('date');
+      $table->string('applying_date')->nullable();
+      $table->string('code');
+      $table->string('type');
+      $table->time('time');
+      $table->string('status')->default('pending');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('exams');
-    }
+  /**
+  * Reverse the migrations.
+  *
+  * @return void
+  */
+  public function down()
+  {
+    Schema::dropIfExists('exams');
+  }
 }

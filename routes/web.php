@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('customers','CustomerController');
+Route::resource('exams','ExamController');
+Route::resource('payments','PaymentController');

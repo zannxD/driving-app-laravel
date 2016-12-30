@@ -3,88 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use App\Customer;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-     
-        $customers=Customer::all();
-        // return view('customers.index',['customers'=>$customers]);
 
-        return response()->json(['data'=>$customers],200);
+  public function index()
+  {
+    $customers=Customer::where('status',Input::get('status'))->get();
+    return response()->json(['data'=>$customers],200);
 
-    }
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function create()
+  {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+  public function store(Request $request)
+  {
+   
+    $customer=Customer::create([
+      'fullname'=>Input::get('name'),
+      'date_of_admission'=>Input::get('joinDate'),
+      'nic'=>Input::get('nic'),
+      'phone1'=>Input::get('phone1'),
+      'phone2'=>Input::get('phone2'),
+      'address'=>Input::get('address'),
+      'remarks'=>Input::get('remarks'),
+      'total_price'=>Input::get('totalfees'),
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    ]);
+      return response()->json(['data'=>'Customer Saved Successfully'],200);
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  public function show($id)
+  {
+    $customer=Customer::find($id);
+    // $exams=Exams::where('customer_id',$id)->get();
+    // $payments=Payment::all();
+    return response()->json(['customer'=>$customer],200);
+  }
+
+  public function edit($id)
+  {
+    $customer=Customer::find($id);
+    return response()->json(['data'=>$customer],200);
+  }
+
+
+  public function update(Request $request, $id)
+  {
+    $customer=Customer::find($id)->update([
+      'fullname'=>Input::get('name'),
+      'date_of_admission'=>Input::get('joinDate'),
+      'nic'=>Input::get('nic'),
+      'phone1'=>Input::get('phone1'),
+      'phone2'=>Input::get('phone2'),
+      'address'=>Input::get('address'),
+      'remarks'=>Input::get('remarks'),
+      'total_price'=>Input::get('totalfees'),
+      'status'=>Input::get('status')
+
+    ]);
+      return response()->json(['data'=>'Customer Updated Successfully'],200);
+  }
+
+
+  public function destroy($id)
+  {
+    //
+  }
 }
