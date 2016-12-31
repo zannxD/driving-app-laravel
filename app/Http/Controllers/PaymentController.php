@@ -17,7 +17,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-      $payments=Payment::where('date',Input::get('paymentDate'))->get();
+      $payments=Payment::whereBetween('date',[Input::get('startDate'),Input::get('endDate')])->get();
       return response()->json(['data'=>$payments],200);
     }
 
@@ -33,10 +33,10 @@ class PaymentController extends Controller
 
         $payment=Payment::create([
           'customer_id'=>Input::get('cid'),
-          'description'=>Input::get('remarks'),
+          'description'=>Input::get('remarkSave'),
           'type'=>Input::get('type'),
           'amount'=>Input::get('amount'),
-          'date'=>Input::get('paymentDate')
+          'date'=>Input::get('paymentDateSave')
         ]);
         return response()->json(['data','Payments saved successfully'],200);
     }

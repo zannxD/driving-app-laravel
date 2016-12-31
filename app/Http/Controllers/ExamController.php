@@ -31,7 +31,7 @@ class ExamController extends Controller
 
     $exams=Exam::create([
       'customer_id'=>Input::get('cid'),
-      'date'=>date("Y/m/d",strtotime(Input::get('examDate'))),
+      'date'=>Input::get('dateFormat'),
       'code'=>Input::get('code'),
       'type'=>Input::get('type'),
       'time'=>Input::get('time'),

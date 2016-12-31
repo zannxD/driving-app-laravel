@@ -15,12 +15,12 @@ class CreateExamsTable extends Migration
   {
     Schema::create('exams', function (Blueprint $table) {
       $table->increments('id');
-      $table->integer('customer_id')->nullable();
+      $table->unsignedInteger('customer_id')->nullable();
       $table->date('date');
       $table->string('applying_date')->nullable();
       $table->string('code');
       $table->string('type');
-      $table->time('time');
+      $table->string('time');
       $table->string('status')->default('pending');
       $table->timestamps();
     });
