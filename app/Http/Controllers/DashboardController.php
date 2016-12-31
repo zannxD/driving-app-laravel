@@ -7,6 +7,10 @@ use App\PaymentReports;
 use App\Customer;
 use App\Payment;
 use App\Exam;
+use App\DueReport;
+
+use DB;
+
 class DashboardController extends Controller
 {
     /**
@@ -35,16 +39,24 @@ class DashboardController extends Controller
         }
 
         // active customers count->integer
-        $active_customers=Customer::where('status'==="active")->get();
-        $count=count($active_customers);
+        $active=Customer::where('status',"active")->count();
+        //$count=count($active_customers);
 
         // customers registed this year ->integer -> where('joinDate','LIKE','2016%')     //'2016-10-10'
-        $cusomers_this_year=Customer::where('date_of_admission','LIKE',$y,'%')->get();
+        // $cusomers_this_year=Customer::where('date_of_admission','LIKE',$y.'%')->get();
         // money Due -> total price - paid
+
         // $cus=Customer::select('total_price')->get();
+        $due = DB::select(DB::raw(
+            "Select SUM((d.total_price - d.paid)) as due from due_reports d 
+            where d.total_price > d.paid
+            "
+        ));
 
+        
 
-        return response()->json(['payments'=>$payments,'count'=>$count,'cusomers_this_year',$cusomers_this_year],200);
+        
+        return response()->json(['payments'=>$payments,'active'=>$active, 'due'=>$due],200);
 
     }
 
