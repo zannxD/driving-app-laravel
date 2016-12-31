@@ -11,8 +11,8 @@
 |
 */
 
- 
-
 Route::resource('customers','CustomerController');
 Route::resource('exams','ExamController');
 Route::resource('payments','PaymentController');
+Route::resource('dashboard','DashboardController');
+ 
