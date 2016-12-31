@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PaymentReports;
-
+use App\Customer;
+use App\Payment;
+use App\Exam;
 class DashboardController extends Controller
 {
     /**
@@ -14,30 +16,36 @@ class DashboardController extends Controller
      */
     public function index()
     {
- 
-        $y = date('Y');  
-        $m = date('m');  
+
+        $y = date('Y');
+        $m = date('m');
 
         $payments = array();
 
         for($i=0; $i<6; $i++){
             if($m < 1){
-               $m = 12;  
-               $y = $y-1; 
+               $m = 12;
+               $y = $y-1;
            }
            $pay = PaymentReports::where('year',$y)->where('month',$m)->get();
 
            array_push($payments,$pay);
 
-            $m--; 
+            $m--;
         }
 
         // active customers count->integer
-        // customers registed this year ->integer -> where('joinDate','LIKE','2016%')     //'2016-10-10'
-        // money Due -> total price - paid
+        $active_customers=Customer::where('status'==="active")->get();
+        $count=count($active_customers);
 
-        return response()->json(['payments'=>$payments],200);
-        
+        // customers registed this year ->integer -> where('joinDate','LIKE','2016%')     //'2016-10-10'
+        $cusomers_this_year=Customer::where('date_of_admission','LIKE',$y,'%')->get();
+        // money Due -> total price - paid
+        // $cus=Customer::select('total_price')->get();
+
+
+        return response()->json(['payments'=>$payments,'count'=>$count,'cusomers_this_year',$cusomers_this_year],200);
+
     }
 
     /**
