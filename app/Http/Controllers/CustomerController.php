@@ -71,7 +71,7 @@ class CustomerController extends Controller
 		      'phone2'=>Input::get('land'),
 		      'address'=>Input::get('address'),
 		      'remarks'=>Input::get('remarks'),
-		      'total_price'=>Input::get('fees'),
+		      'total_price'=>Input::get('newFees'),
 		      'status'=>Input::get('status')
 		
 		]);

@@ -56,9 +56,9 @@ class ExamController extends Controller
 
   public function update(Request $request, $id)
   {
-    $customer=Customer::find($id)->update([
-      'customer_id'=>Input::get('cid'),
-      'date'=>date("Y/m/d",strtotime(Input::get('examDate'))),
+    $customer=Exam::find($id)->update([
+      'customer_id'=>Input::get('customer_id'),
+      'date'=>Input::get('date'),
       'code'=>Input::get('code'),
       'type'=>Input::get('type'),
       'time'=>Input::get('time'),
