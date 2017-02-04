@@ -29,7 +29,7 @@ class CustomerController extends Controller
 
 	public function store(Request $request)
 	  {
-
+ 
 		$customer=Customer::create([
 		      'fullname'=>Input::get('name'),
 		      'date_of_admission'=>Input::get('joinDateString'),

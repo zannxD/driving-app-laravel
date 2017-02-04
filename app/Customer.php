@@ -16,7 +16,9 @@ class Customer extends Model
     'phone1',
     'phone2',
     'status',
-    'remarks'
+    'remarks',
+    'regno',
+    'vehicles'
   ];
   public function payments(){
     return $this->hasMany('App\Payment');

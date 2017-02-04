@@ -12,7 +12,9 @@ class Payment extends Model
     'description',
     'type',
     'amount',
-    'date'
+    'date',
+    'billno',
+    'stamp'
   ];
 
   public function customer(){
