@@ -36,7 +36,10 @@ class PaymentController extends Controller
           'description'=>Input::get('remarkSave'),
           'type'=>Input::get('type'),
           'amount'=>Input::get('amount'),
-          'date'=>Input::get('paymentDateSave')
+          'date'=>Input::get('paymentDateSave'),
+          'stamp'=>Input::get('stampfee'),
+          'billno'=>Input::get('billno')
+
         ]);
         return response()->json(['data','Payments saved successfully'],200);
     }

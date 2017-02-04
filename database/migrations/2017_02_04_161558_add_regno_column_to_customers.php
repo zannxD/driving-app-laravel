@@ -14,7 +14,7 @@ class AddRegnoColumnToCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            //
+            $table->string('regno')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddRegnoColumnToCustomers extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            //
+            $table->dropColumn('regno');
         });
     }
 }

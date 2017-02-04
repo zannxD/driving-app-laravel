@@ -14,7 +14,7 @@ class AddVehiclesColumnToCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('vehicles')->nullable();
+            $table->text('vehicles')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddVehiclesColumnToCustomers extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            //
+            $table->dropColumn('vehicles');
         });
     }
 }
